@@ -25,6 +25,10 @@
     </div>
 
     <button type="submit" class="btn btn-success">Salvar</button>
-    <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">Cancelar</a>
+    {% if post %}
+        <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">Cancelar</a>
+    {% else %}
+        <a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
+    {% endif %}
 </form>
 {% endblock %}
