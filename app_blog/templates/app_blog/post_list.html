@@ -24,7 +24,7 @@
                     por {{ post.author }} em {{ post.published_date|date:"d/m/Y H:i" }}
                 </h6>
                 <p class="card-text">{{ post.text|truncatewords:30 }}</p>
-                <a href="#" class="btn btn-primary">Leia mais</a>
+                <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Leia mais</a> 
             </div>
         </div>
     {% empty %}
