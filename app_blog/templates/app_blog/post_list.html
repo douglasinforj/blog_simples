@@ -2,20 +2,36 @@
 
 {% load static %}
 
-{% block title%}Lista de Posts{% endblock %}
+{% block title %}Lista de Posts{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Último Post</h1>
-{% for post in posts %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h4 class="card-title">{{ post.tilte }}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">por {{ post.author }} em {{ post.published_date|date:"d/m/Y H:i" }}</h6>
-            <p class="card-text">{{ post.text|truncatewords:30 }}</p>
-            <a href="#" class="btn btn-primary">Leia mais</a>
-        </div>
+
+<form method="get" class="mb-3 mt-3">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Buscar posts..." value="{{ query }}">
+        <button class="btn btn-primary" type="submit">Buscar</button>
     </div>
-{% empty %}
-    <p>Nenhuma post publicado ainda.</p>
-{% endfor %}
-{% endblock%}
+</form>
+
+<h1 class="mb-4">Último Post</h1>
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4 class="card-title">{{ post.title }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    por {{ post.author }} em {{ post.published_date|date:"d/m/Y H:i" }}
+                </h6>
+                <p class="card-text">{{ post.text|truncatewords:30 }}</p>
+                <a href="#" class="btn btn-primary">Leia mais</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Nenhum post publicado ainda.</p>
+    {% endfor %}
+{% else %}
+    <p class="text-muted">Nenhum post encontrado.</p>
+{% endif %}
+
+{% endblock content %}
