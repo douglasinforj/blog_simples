@@ -19,6 +19,51 @@
         {% endif %}
         <a href="{% url 'post_list' %}" class="btn btn-secondary btn-sm">Voltar</a>
     </div>
+
+    <hr>
+    <div id="votos">
+        <button id="like-btn">Gostei 👍 (<span id="like-count">{{ post.likes }}</span>)</button>
+        <button id="dislike-btn">Não Gostei 👎 (<span id="dislike-count">{{ post.dislikes }}</span>)</button>
+      </div>
+    <div id="mensagem-voto" style="color: red;"></div>
+
+    {% block extra_js %}
+
+    <script>
+        const postId = {{ post.id }};
+        const csrfToken = '{{ csrf_token }}';
+    
+        function votar(tipo) {
+            fetch(`/votar/${postId}/${tipo}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                }
+            }).then(response => {
+                return response.json().then(data => ({ status: response.status, body: data }));
+            }).then(({ status, body }) => {
+                if (status === 200) {
+                    // Atualiza os contadores na tela
+                    document.getElementById('like-count').textContent = body.likes;
+                    document.getElementById('dislike-count').textContent = body.dislikes;
+    
+                    // Desativa os botões
+                    document.getElementById('like-btn').disabled = true;
+                    document.getElementById('dislike-btn').disabled = true;
+                } else {
+                    document.getElementById('mensagem-voto').textContent = body.error || 'Erro ao votar.';
+                }
+            });
+        }
+    
+        document.getElementById('like-btn').addEventListener('click', () => votar('like'));
+        document.getElementById('dislike-btn').addEventListener('click', () => votar('dislike'));
+    </script>
+    
+    {% endblock %}
+    
+
+    
 </div>
 {% endblock %}
 
