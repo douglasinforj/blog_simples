@@ -48,12 +48,17 @@
                                 <a class="nav-link" href="{% url 'painel_administrativo' %}">Admin Blog</a>
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sair</a>
+                        <li class="nav-item d-flex align-items-center">
+                            <form method="post" action="{% url 'logout' %}" class="m-0 p-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn nav-link p-0" style="border: none; background: none; color: white;">
+                                    Sair
+                                </button>
+                            </form>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Entrar</a>
+                            <a class="nav-link" href="{% url 'login' %}">Entrar</a>
                         </li>
                     {% endif %}
                 </ul>
