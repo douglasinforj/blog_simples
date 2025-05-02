@@ -24,16 +24,17 @@ com as postagens utilizando **botões de "Gostei" e "Não Gostei"**, sem precisa
 
 ## Imagens do Projeto
 
+### Tela Postagem
 ![Tela principal do Blog](assets/post_list.png)
-
+### Tela Login
 ![Tela de Login](assets/login.png)
-
+### Menus para logados
 ![Tela Pós Logar](assets/menus_pos_logar.png)
-
+### Tela nova Postagem
 ![Tela nova Postagem](assets/post_new.png)
-
+### Tela detalhe da Postagem
 ![Tela nova Detalhe do Post](assets/post_detail.png)
-
+### Tela Administrativa do blog
 ![Tela nova Administração Blog](assets/admin_blog.png)
 
 
