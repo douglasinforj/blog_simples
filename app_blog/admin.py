@@ -4,15 +4,15 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_date', 'published_date', 'is_published', 'aprovado', 'recusado')
+    list_display = ('title', 'author', 'created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
     list_filter = ('author', 'published_date', 'created_date', 'aprovado', 'recusado')
     search_fields = ('title', 'text', 'author__username')
-    readonly_fields = ('created_date', 'published_date')
+    readonly_fields = ('created_date', 'published_date', 'likes', 'dislikes')
     actions = ['publicar_posts', 'despublicar_posts', 'aprovar_posts', 'recusar_posts']
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'author', 'text', 'aprovado', 'recusado')
+            'fields': ('title', 'author', 'text', 'aprovado', 'recusado', 'likes', 'dislikes')
         }),
         ('Publicação', {
             'fields': ('created_date', 'published_date'),
