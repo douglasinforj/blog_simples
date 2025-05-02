@@ -34,7 +34,7 @@
         const csrfToken = '{{ csrf_token }}';
     
         function votar(tipo) {
-            fetch(`/votar/${postId}/${tipo}/`, {
+            fetch(`/votar/${postId}/${tipo}/`, {     //chama a função votar na view, pela rota, passando id e tipo
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': csrfToken,
@@ -59,7 +59,7 @@
         document.getElementById('like-btn').addEventListener('click', () => votar('like'));
         document.getElementById('dislike-btn').addEventListener('click', () => votar('dislike'));
     </script>
-    
+
     {% endblock %}
     
 
