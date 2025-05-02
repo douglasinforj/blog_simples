@@ -206,3 +206,8 @@ LOGGING = {
 log_dir = os.path.join(BASE_DIR, 'logs')
 os.makedirs(log_dir, exist_ok=True)
 
+
+
+LOGIN_REDIRECT_URL = 'post_list'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'post_list'  # ou outra view pública
