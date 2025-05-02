@@ -24,6 +24,12 @@
                     por {{ post.author }} em {{ post.published_date|date:"d/m/Y H:i" }}
                 </h6>
                 <p class="card-text">{{ post.text|truncatewords:30 }}</p>
+
+                <!-- Contador de likes/dislikes -->
+                <p class="card-text">
+                    👍 {{ post.likes }} | 👎 {{ post.dislikes }}
+                </p>
+                
                 <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Leia mais</a> 
             </div>
         </div>
