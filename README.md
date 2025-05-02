@@ -22,6 +22,8 @@ com as postagens utilizando **botões de "Gostei" e "Não Gostei"**, sem precisa
 - As interações são registradas em tempo real via JavaScript (fetch API).
 
 
+## Imagens do Projeto
+
 ![Tela principal do Blog](assets/post_list.png)
 
 ![Tela de Login](assets/login.png)
