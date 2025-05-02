@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404 # retorna detalhes de um 
 from . forms import PostForm
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
-
+from django.http import JsonResponse
 
 
 def post_list(request):
@@ -109,3 +109,27 @@ def editar_post_admin(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'app_blog/post_edit.html', {'form': form, 'post': post})
+
+
+
+#-----------------------------Sistema de Likes-----------------------------
+
+def votar(request, post_id, tipo):
+    post = get_object_or_404(Post, id=post_id)
+    cookie_key = f'post_voted_{post_id}'
+
+    if request.COOKIES.get(cookie_key):
+        return JsonResponse({'error': 'Você já votou.'}, status=403)
+
+    if tipo == 'like':
+        post.likes += 1
+    elif tipo == 'dislike':
+        post.dislikes += 1
+    post.save()
+
+    response = JsonResponse({
+        'likes': post.likes,
+        'dislikes': post.dislikes
+    })
+    response.set_cookie(cookie_key, 'true', max_age=60*60*24*30)  # 30 dias
+    return response
