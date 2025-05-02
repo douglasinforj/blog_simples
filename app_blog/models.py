@@ -15,6 +15,9 @@ class Post(models.Model):
     aprovado = models.BooleanField(default=False)
     recusado = models.BooleanField(default=False)
 
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
+
     def publish(self):
         self.published_date = timezone.now()
         try:
