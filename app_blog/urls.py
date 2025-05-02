@@ -13,4 +13,7 @@ urlpatterns = [
     path('admin_blog/recusar/<int:pk>/', views.recusar_post, name='recusar_post'),
     path('admin_blog/excluir/<int:pk>/', views.excluir_post_admin, name='excluir_post_admin'),
     path('admin_blog/editar/<int:pk>/', views.editar_post_admin, name='editar_post_admin'),
+
+
+    path('votar/<int:post_id>/<str:tipo>/', views.votar, name='votar'),
 ]
