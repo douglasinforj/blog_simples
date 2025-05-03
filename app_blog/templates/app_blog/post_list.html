@@ -22,9 +22,11 @@
                 <!-- Coluna da imagem -->
                 <div class="col-md-4">
                     {% if post.image and post.image.url %}
-                        <img src="{{ post.image.url }}" class="img-fluid rounded-start" alt="Imagem do post" style="height:100%; object-fit:cover;">
+                        <img src="{{ post.image.url }}" class="img-fluid rounded-start" alt="Imagem do post"
+                             style="width: 400px; height: 300px; object-fit: cover;">
                     {% else %}
-                        <img src="{% static 'images/default.png' %}" class="img-fluid rounded-start" alt="Imagem padrão" style="height:100%; object-fit:cover;">
+                        <img src="{% static 'images/default.png' %}" class="img-fluid rounded-start" alt="Imagem padrão"
+                             style="width: 400px; height: 4300px; object-fit: cover;">
                     {% endif %}
                 </div>
 

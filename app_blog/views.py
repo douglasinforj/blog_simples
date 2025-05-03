@@ -21,7 +21,7 @@ def post_list(request):
         )
 
     
-    posts = posts.order_by('published_date')
+    posts = posts.order_by('-published_date')
 
     return render(request, 'app_blog/post_list.html', {'posts': posts, 'query': query})
 
