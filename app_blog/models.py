@@ -22,6 +22,8 @@ class Post(models.Model):
 
     visualizacoes = models.PositiveIntegerField(default=0)
 
+    video_url = models.URLField(blank=True, null=True, verbose_name="URL do vídeo do YouTube")
+
     def publish(self):
         self.published_date = timezone.now()
         try:
