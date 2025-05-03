@@ -32,6 +32,14 @@
         {% endif %}
     </div>
 
+    <div class="mb-3">
+        <label for="{{ form.video_url.id_for_label }}" class="form-label">Vídeo do YouTube</label>
+        {{ form.video_url }}
+        {% if form.video_url.errors %}
+            <div class="text-danger">{{ form.video_url.errors }}</div>
+        {% endif %}
+    </div>
+
 
     <button type="submit" class="btn btn-primary">Publicar</button>
     <a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
