@@ -32,4 +32,56 @@
     {% endfor %}
   </tbody>
 </table>
+
+<h2 class="mt-5">Estatísticas dos Últimos Posts</h2>
+<canvas id="postChart" width="600" height="400"></canvas>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const titles = {{ titles|safe }};
+  const views = {{ views|safe }};
+  const likes = {{ likes|safe }};
+  const dislikes = {{ dislikes|safe }};
+
+  const ctx = document.getElementById('postChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: titles,
+      datasets: [
+        {
+          label: 'Visualizações',
+          data: views,
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        },
+        {
+          label: 'Curtidas',
+          data: likes,
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        },
+        {
+          label: 'Dislikes',
+          data: dislikes,
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Estatísticas dos Últimos Posts Aprovados'
+        }
+      }
+    }
+  });
+</script>
+
+
 {% endblock %}
