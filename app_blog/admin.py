@@ -1,18 +1,19 @@
 from django.contrib import admin
 from django.utils import timezone
 from .models import Post
+from django.utils.html import format_html
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
     list_filter = ('author', 'published_date', 'created_date', 'aprovado', 'recusado')
     search_fields = ('title', 'text', 'author__username')
-    readonly_fields = ('created_date', 'published_date', 'likes', 'dislikes')
+    readonly_fields = ('created_date', 'published_date', 'likes', 'dislikes', 'image_preview')
     actions = ['publicar_posts', 'despublicar_posts', 'aprovar_posts', 'recusar_posts']
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'author', 'text', 'aprovado', 'recusado', 'likes', 'dislikes')
+            'fields': ('title', 'author', 'text', 'image', 'image_preview','aprovado', 'recusado', 'likes', 'dislikes')
         }),
         ('Publicação', {
             'fields': ('created_date', 'published_date'),
@@ -43,3 +44,11 @@ class PostAdmin(admin.ModelAdmin):
         count = queryset.update(recusado=True, aprovado=False)
         self.message_user(request, f"{count} post(s) recusado(s) com sucesso.")
     recusar_posts.short_description = "Recusar posts selecionados"
+
+
+    #Função para exibir miniatura da imagem no admin:
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="150" style="object-fit:cover;" />', obj.image.url)
+        return "(Sem imagem)"
+    image_preview.short_description = "Pré-visualização da imagem"
