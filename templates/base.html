@@ -12,6 +12,7 @@
     <style>
         body{
             padding-top: 4.5rem;
+            padding-bottom: 60px;
         }
         footer{
             margin-top: 2rem;
@@ -19,6 +20,20 @@
             border-top: 1px solid #ccc;
             text-align: center;
         }
+
+        #fixed-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: #f8f9fa; /* ou a cor que preferir */
+            pointer-events: none; /* impede interações, se quiser totalmente por trás */
+        }
+
+        #fixed-footer .container {
+            pointer-events: auto; /* habilita interação apenas com o conteúdo */
+        }
+
     </style>
 
     <!--head extra para as demais templates-->
@@ -74,7 +89,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-light py-3 mt-auto">
+    <footer class="bg-light py-3 mt-auto" id="fixed-footer">
         <div class="container text-center">
             <p class="text-muted mb-0">© {{ year|default:"2025" }} - Meu Blog Simples</p>
         </div>
