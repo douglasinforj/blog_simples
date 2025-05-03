@@ -48,7 +48,7 @@ def post_edit(request, pk):
         return HttpResponseForbidden("Você não tem permissão para editar este post.")
     
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.published_date = timezone.now()
