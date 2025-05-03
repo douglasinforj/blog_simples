@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 
+{% load static %}
+
 {% block title %}Editar Post{% endblock %}
 
 {% block content %}
 <h2 class="mb-4">Editar Post</h2>
-<form method="post" novalidate>
+<form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
 
     <div class="mb-3">
@@ -23,6 +25,22 @@
             <div class="text-danger">{{ form.text.errors }}</div>
         {% endif %}
     </div>
+
+    <div class="mb-3">
+        <label for="{{ form.image.id_for_label }}" class="form-label">Imagem</label>
+        {{ form.image }}
+        {% if form.image.errors %}
+            <div class="text-danger">{{ form.image.errors }}</div>
+        {% endif %}
+    
+        {% if post.image %}
+            <div class="mt-2">
+                <p>Imagem atual:</p>
+                <img src="{{ post.image.url }}" alt="Imagem atual" style="max-width: 200px; height: auto;">
+            </div>
+        {% endif %}
+    </div>
+
 
     <button type="submit" class="btn btn-success">Salvar</button>
     {% if post %}
