@@ -62,7 +62,7 @@ def post_edit(request, pk):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk, published_date__lte=timezone.now())  # para evitar que usuários vejam posts ainda não publicados.
-    
+
     #contagem de visualizações
     post.visualizacoes += 1
     post.save(update_fields=['visualizacoes'])
@@ -79,7 +79,22 @@ def is_admin(user):
 @user_passes_test(is_admin)
 def painel_administrativo(request):
     posts_pendentes = Post.objects.filter(aprovado=False, recusado=False)
-    return render(request, 'app_blog/painel_admin.html', {'posts_pendentes': posts_pendentes})
+
+    # Ultimos 10 posts aprovados para o gráfico
+    posts_publicados = Post.objects.filter(aprovado=True).order_by('-published_date')[:10]
+
+    context = {
+        'posts_pendentes': posts_pendentes,
+        'titles': [post.title for post in posts_publicados],
+        'views': [post.visualizacoes for post in posts_publicados],
+        'likes': [post.likes for post in posts_publicados],
+        'dislikes': [post.dislikes for post in posts_publicados],
+    }
+
+    return render(request, 'app_blog/painel_admin.html',  context)
+
+
+
 
 @user_passes_test(is_admin)
 def aprovar_post(request, pk):
