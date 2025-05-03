@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 {% block title %}{{ post.title }}{% endblock %}
 
+{% load static %}
+
 {% block content %}
 <div class="container mt-4">
     <div class="mb-4">
         <h1 class="mb-3">{{ post.title }}</h1>
+
+        {% if post.image and post.image.url %}
+            <img src="{{ post.image.url }}" alt="Imagem do post" class="img-fluid mb-3 rounded" style="max-height: 400px; object-fit: cover;">
+        {% else %}
+            <img src="{% static 'images/default.png' %}" alt="Imagem do post" class="img-fluid mb-3 rounded" style="max-height: 400px; object-fit: cover;">
+        {% endif %}
+
+
         <p class="text-muted">
             Publicado por <strong>{{ post.author }}</strong>
             em {{ post.published_date|date:"d/m/Y H:i" }}
