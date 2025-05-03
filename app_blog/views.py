@@ -62,6 +62,11 @@ def post_edit(request, pk):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk, published_date__lte=timezone.now())  # para evitar que usuários vejam posts ainda não publicados.
+    
+    #contagem de visualizações
+    post.visualizacoes += 1
+    post.save(update_fields=['visualizacoes'])
+
     return render(request, 'app_blog/post_detail.html', {'post': post })
 
 
