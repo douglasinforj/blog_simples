@@ -15,6 +15,9 @@ class PostForm(forms.ModelForm):
                 'placeholder': 'Digite o conteúdo do post',
                 'rows': 6,
             }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+            }),
         }
         labels = {
             'title': 'Título',
