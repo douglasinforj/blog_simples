@@ -18,6 +18,8 @@ class Post(models.Model):
     likes = models.PositiveIntegerField(default=0)
     dislikes = models.PositiveIntegerField(default=0)
 
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+
     def publish(self):
         self.published_date = timezone.now()
         try:
