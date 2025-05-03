@@ -20,6 +20,8 @@ class Post(models.Model):
 
     image = models.ImageField(upload_to='post_images/', null=True, blank=True)
 
+    visualizacoes = models.PositiveIntegerField(default=0)
+
     def publish(self):
         self.published_date = timezone.now()
         try:
