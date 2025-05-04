@@ -21,6 +21,7 @@ com as postagens utilizando **botões de "Gostei" e "Não Gostei"**, sem precisa
 - Gráficos interativos com estatísticas (ex: curtidas, visualizações) usando Chart.js
 - Script dinâmico para atualização de votos via JavaScript
 - Layout com Bootstrap 5 responsivo
+- Filtro por categoria populares
 
 ## Autenticação e Permissões
 - Sistema de login integrado
