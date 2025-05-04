@@ -15,6 +15,8 @@ def post_list(request):
     
     posts = Post.objects.filter(aprovado=True, published_date__lte=timezone.now())
 
+    categorias = Categoria.objects.all()
+
     if query:
         posts = posts.filter(
             Q(title__icontains=query) | Q(text__icontains=query)
@@ -23,7 +25,7 @@ def post_list(request):
     
     posts = posts.order_by('-published_date')
 
-    return render(request, 'app_blog/post_list.html', {'posts': posts, 'query': query})
+    return render(request, 'app_blog/post_list.html', {'posts': posts, 'query': query, 'categorias': categorias,})
 
 
 def post_new(request):
@@ -161,7 +163,19 @@ def explorar(request):
     categorias = Categoria.objects.all()
     return render(request, 'app_blog/explorar.html', {'categorias': categorias})
 
+"""
 def posts_por_categoria(request, slug):
     categoria = get_object_or_404(Categoria, slug=slug)
     posts = Post.objects.filter(categoria=categoria, aprovado=True).order_by('-published_date')
     return render(request, 'app_blog/post_list.html', {'posts': posts, 'categoria': categoria})
+"""
+
+def posts_por_categoria(request, slug):
+    categoria = get_object_or_404(Categoria, slug=slug)
+    posts = Post.objects.filter(categoria=categoria, aprovado=True).order_by('-published_date')
+    categorias = Categoria.objects.all()  # adiciona todas as categorias
+    return render(request, 'app_blog/post_list.html', {
+        'posts': posts,
+        'categoria': categoria,
+        'categorias': categorias,
+    })
