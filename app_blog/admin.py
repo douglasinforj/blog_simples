@@ -1,19 +1,19 @@
 from django.contrib import admin
 from django.utils import timezone
-from .models import Post
+from .models import Post, Categoria
 from django.utils.html import format_html
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
-    list_filter = ('author', 'published_date', 'created_date', 'aprovado', 'recusado')
-    search_fields = ('title', 'text', 'author__username')
+    list_display = ('title', 'author', 'categoria','created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
+    list_filter = ('author', 'categoria' ,'published_date', 'created_date', 'aprovado', 'recusado')
+    search_fields = ('title', 'text', 'author__username', 'categoria__nome')
     readonly_fields = ('created_date', 'published_date', 'likes', 'dislikes', 'image_preview')
     actions = ['publicar_posts', 'despublicar_posts', 'aprovar_posts', 'recusar_posts']
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'author', 'text', 'image', 'image_preview','aprovado', 'recusado', 'likes', 'dislikes')
+            'fields': ('title', 'author', 'categoria','text', 'image', 'image_preview','aprovado', 'recusado', 'likes', 'dislikes')
         }),
         ('Publicação', {
             'fields': ('created_date', 'published_date'),
@@ -52,3 +52,11 @@ class PostAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="150" style="object-fit:cover;" />', obj.image.url)
         return "(Sem imagem)"
     image_preview.short_description = "Pré-visualização da imagem"
+
+
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'slug')
+    prepopulated_fields = {'slug': ('nome',)}
+    search_fields = ('nome',)
