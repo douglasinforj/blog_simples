@@ -5,6 +5,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
+class Categoria(models.Model):
+    nome = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.nome
+
+
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="autor") 
     title = models.CharField(max_length=200)
@@ -23,6 +33,8 @@ class Post(models.Model):
     visualizacoes = models.PositiveIntegerField(default=0)
 
     video_url = models.URLField(blank=True, null=True, verbose_name="URL do vídeo do YouTube")
+
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, related_name='posts')
 
     def publish(self):
         self.published_date = timezone.now()
@@ -54,3 +66,5 @@ class Post(models.Model):
 
     def __str__(self):         
         return self.title
+
+

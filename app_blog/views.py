@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . models import Post
+from . models import Post, Categoria
 from django.utils import timezone
 from django.db.models import Q     #busca complexa
 from django.shortcuts import render, get_object_or_404 # retorna detalhes de um objeto especifico
@@ -153,3 +153,15 @@ def votar(request, post_id, tipo):
     })
     response.set_cookie(cookie_key, 'true', max_age=60*60*24*30)  # 30 dias
     return response
+
+
+#----------------Categorias---------------------
+
+def explorar(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'app_blog/explorar.html', {'categorias': categorias})
+
+def posts_por_categoria(request, slug):
+    categoria = get_object_or_404(Categoria, slug=slug)
+    posts = Post.objects.filter(categoria=categoria, aprovado=True).order_by('-published_date')
+    return render(request, 'app_blog/post_list.html', {'posts': posts, 'categoria': categoria})

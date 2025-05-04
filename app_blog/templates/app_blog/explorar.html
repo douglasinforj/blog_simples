@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Explorar por Categorias{% endblock %}
+{% block content %}
+
+
+<div class="container mt-4">
+    <h2>Categorias</h2>
+    <div class="row">
+        {% for categoria in categorias %}
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'posts_por_categoria' categoria.slug %}" class="btn btn-outline-primary w-100">
+                {{ categoria.nome }}
+            </a>
+        </div>
+        {% endfor%}
+    </div>
+</div>
+{% endblock %}

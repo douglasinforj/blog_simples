@@ -16,4 +16,7 @@ urlpatterns = [
 
 
     path('votar/<int:post_id>/<str:tipo>/', views.votar, name='votar'),
+
+    path('explorar/', views.explorar, name='explorar'),
+    path('categoria/<slug:slug>/', views.posts_por_categoria, name='posts_por_categoria'),
 ]

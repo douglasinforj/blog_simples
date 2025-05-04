@@ -58,3 +58,18 @@
 {% endif %}
 
 {% endblock content %}
+
+{% block sidebar %}
+<div class="card mb-3 mt-3">
+  <div class="card-header bg-primary text-white">Categorias Populares</div>
+  <ul class="list-group list-group-flush">
+    {% for cat in categorias_sidebar %}
+      <li class="list-group-item">
+        <a href="{% url 'posts_por_categoria' cat.slug %}">{{ cat.nome }}</a>
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">Nenhuma categoria encontrada.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

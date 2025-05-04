@@ -58,6 +58,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'post_new' %}">Novo Post</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'explorar' %}">Explorar</a>
+                        </li>
                         {% if user.is_staff %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'painel_administrativo' %}">Admin Blog</a>
@@ -82,10 +85,23 @@
     </nav>
 
     <!--Conteúdo principal para as templates-->
+
     <main class="container flex-grow-1 my-4">
-        {% block content %}
-        <!-- Conteúdo das páginas vai aqui -->
-        {% endblock %}
+        <div class="row">
+            <!-- Conteúdo principal -->
+            <div class="col-md-8">
+            {% block content %}
+            <!-- Conteúdo das páginas vai aqui -->
+            {% endblock %}
+            </div>
+        
+            <!-- Sidebar -->
+            <div class="col-md-4">
+            {% block sidebar %}
+            <!-- Conteúdo da sidebar vai aqui -->
+            {% endblock %}
+            </div>
+        </div>
     </main>
 
     <!-- Rodapé -->

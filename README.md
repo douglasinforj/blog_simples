@@ -8,6 +8,7 @@ com as postagens utilizando **botões de "Gostei" e "Não Gostei"**, sem precisa
 ## Funcionalidades
 
 - Cadastro, edição e remoção de posts via Templates e Django Admin
+- Busca por título ou conteúdo
 - Upload de imagens para cada post
 - Possibilidade de adicionar link de vídeo do YouTube (embed lado a lado com a imagem)
 - Sistema de aprovação/recusa de postagens pendentes pelo painel administrativo personalizado
@@ -58,7 +59,6 @@ com as postagens utilizando **botões de "Gostei" e "Não Gostei"**, sem precisa
 ## Possíveis Funcionalidades Futuras
 - Comentários por post
 - Sistema de categorias/tags
-- Busca por título ou conteúdo
 - Destaque de postagens populares
 - Página de perfil do autor
 - Agendamento de publicação
