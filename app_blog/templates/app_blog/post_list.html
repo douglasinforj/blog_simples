@@ -23,10 +23,10 @@
                 <div class="col-md-4">
                     {% if post.image and post.image.url %}
                         <img src="{{ post.image.url }}" class="img-fluid rounded-start" alt="Imagem do post"
-                             style="width: 400px; height: 300px; object-fit: cover;">
+                             style="width: 350px; height: 250px; object-fit: cover;">
                     {% else %}
                         <img src="{% static 'images/default.png' %}" class="img-fluid rounded-start" alt="Imagem padrão"
-                             style="width: 400px; height: 4300px; object-fit: cover;">
+                             style="width: 350px; height: 250px; object-fit: cover;">
                     {% endif %}
                 </div>
 
@@ -57,13 +57,14 @@
     <p class="text-muted">Nenhum post encontrado.</p>
 {% endif %}
 
-{% endblock content %}
+{% endblock %}
+
 
 {% block sidebar %}
 <div class="card mb-3 mt-3">
   <div class="card-header bg-primary text-white">Categorias Populares</div>
   <ul class="list-group list-group-flush">
-    {% for cat in categorias_sidebar %}
+    {% for cat in categorias %}
       <li class="list-group-item">
         <a href="{% url 'posts_por_categoria' cat.slug %}">{{ cat.nome }}</a>
       </li>
@@ -73,3 +74,4 @@
   </ul>
 </div>
 {% endblock %}
+
