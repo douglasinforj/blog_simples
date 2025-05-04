@@ -47,6 +47,14 @@
                 <div class="text-danger">{{ form.video_url.errors }}</div>
             {% endif %}
         </div>
+
+        <div class="mb-3">
+            <label for="{{ form.categoria.id_for_label }}" class="form-label">Categoria</label>
+            {{ form.categoria }}
+            {% if form.categoria.errors %}
+                <div class="text-danger">{{ form.categoria.errors }}</div>
+            {% endif %}
+        </div>
         
     </div>
 
