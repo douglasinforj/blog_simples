@@ -1,6 +1,6 @@
 from django import forms 
 from .models import Post
-from taggit.forms import TagField
+from taggit.forms import TagField, TagWidget
 
 class PostForm(forms.ModelForm):
 
@@ -26,7 +26,7 @@ class PostForm(forms.ModelForm):
             'categoria': forms.Select(attrs={
                 'class': 'form-control',
             }),
-            'tags': forms.TextInput(attrs={
+            'tags': TagWidget(attrs={
                 'class': 'form-control',
                 'placeholder': 'Digite tags separadas por vírgula (ex: viagem, comida, verão)'
         }),
