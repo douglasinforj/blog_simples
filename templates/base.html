@@ -61,6 +61,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'explorar' %}">Explorar</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'lista_tags' %}">Tags</a>
+                        </li>
                         {% if user.is_staff %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'painel_administrativo' %}">Admin Blog</a>
