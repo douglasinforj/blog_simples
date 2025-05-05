@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'app_blog',
     'requestlogs',
     "widget_tweaks",
+    "taggit",
 ]
 
 MIDDLEWARE = [
