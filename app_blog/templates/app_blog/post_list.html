@@ -73,5 +73,20 @@
     {% endfor %}
   </ul>
 </div>
+
+
+<div class="card mb-3">
+    <div class="card-header">Tags Populares</div>
+    <div class="card-body">
+      {% for tag in tags %}
+        <a href="{% url 'posts_por_tag' tag.slug %}" class="badge bg-primary me-1">{{ tag.name }}</a>
+      {% empty %}
+        <p>Nenhuma tag cadastrada.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+
+
 {% endblock %}
 
