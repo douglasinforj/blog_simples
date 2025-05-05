@@ -48,6 +48,17 @@
         {% endif %}
     </div>
 
+    <div class="mb-3">
+        <label for="{{ form.tags.id_for_label }}" class="form-label">Tags</label>
+        {{ form.tags }}
+        <div class="form-text">Separe por vírgulas: exemplo, tutorial, django</div>
+        {% if form.tags.errors %}
+            <div class="text-danger">{{ form.tags.errors }}</div>
+        {% endif %}
+    </div>
+
+
+
 
     <button type="submit" class="btn btn-primary">Publicar</button>
     <a href="{% url 'post_list' %}" class="btn btn-secondary">Cancelar</a>
