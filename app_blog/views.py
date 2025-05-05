@@ -192,9 +192,11 @@ def posts_por_categoria(request, slug):
 def posts_por_categoria(request, slug):
     categoria = get_object_or_404(Categoria, slug=slug)
     posts = Post.objects.filter(categoria=categoria, aprovado=True).order_by('-published_date')
+    tags = Tag.objects.all()
     categorias = Categoria.objects.all()  # adiciona todas as categorias
     return render(request, 'app_blog/post_list.html', {
         'posts': posts,
         'categoria': categoria,
         'categorias': categorias,
+        'tags': tags
     })
