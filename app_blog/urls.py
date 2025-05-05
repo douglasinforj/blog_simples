@@ -19,4 +19,7 @@ urlpatterns = [
 
     path('explorar/', views.explorar, name='explorar'),
     path('categoria/<slug:slug>/', views.posts_por_categoria, name='posts_por_categoria'),
+
+    path('tags/', views.lista_tags, name='lista_tags'),
+    path('tag/<slug:tag_slug>/', views.posts_por_tag, name='posts_por_tag'),
 ]
