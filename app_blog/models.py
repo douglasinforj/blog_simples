@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings       
 from django.utils import timezone
 import logging
+from taggit.managers import TaggableManager
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +36,8 @@ class Post(models.Model):
     video_url = models.URLField(blank=True, null=True, verbose_name="URL do vídeo do YouTube")
 
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, related_name='posts')
+
+    tags = TaggableManager(blank=True)
 
     def publish(self):
         self.published_date = timezone.now()
