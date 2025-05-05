@@ -5,15 +5,21 @@ from django.utils.html import format_html
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'categoria','created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
+
+    #mostra as tags na list_display
+    def get_tags(self, obj):
+        return ", ".join(tag.name for tag in obj.tags.all())
+    get_tags.short_description = "Tags"
+
+    list_display = ('title', 'author', 'categoria','get_tags','created_date', 'published_date', 'is_published','likes', 'dislikes', 'aprovado', 'recusado')
     list_filter = ('author', 'categoria' ,'published_date', 'created_date', 'aprovado', 'recusado')
-    search_fields = ('title', 'text', 'author__username', 'categoria__nome')
+    search_fields = ('title', 'text', 'author__username', 'categoria__nome', 'tags__name')
     readonly_fields = ('created_date', 'published_date', 'likes', 'dislikes', 'image_preview')
     actions = ['publicar_posts', 'despublicar_posts', 'aprovar_posts', 'recusar_posts']
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'author', 'categoria','text', 'image', 'image_preview','aprovado', 'recusado', 'likes', 'dislikes')
+            'fields': ('title', 'author', 'categoria','text', 'image', 'tags','image_preview','aprovado', 'recusado', 'likes', 'dislikes')
         }),
         ('Publicação', {
             'fields': ('created_date', 'published_date'),
