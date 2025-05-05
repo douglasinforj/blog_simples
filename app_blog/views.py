@@ -36,6 +36,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
+            form.save_m2m()  # SALVA AS TAGS e outros campos ManyToMany
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
@@ -55,6 +56,7 @@ def post_edit(request, pk):
             post = form.save(commit=False)
             post.published_date = timezone.now()
             post.save()
+            form.save_m2m()                                     # necessário para salvar as tags corretamente
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
