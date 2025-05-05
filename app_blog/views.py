@@ -7,6 +7,7 @@ from . forms import PostForm
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
 from django.http import JsonResponse
+from taggit.models import Tag
 
 
 def post_list(request):
@@ -17,6 +18,8 @@ def post_list(request):
 
     categorias = Categoria.objects.all()
 
+    tags = Tag.objects.all()
+
     if query:
         posts = posts.filter(
             Q(title__icontains=query) | Q(text__icontains=query)
@@ -25,7 +28,7 @@ def post_list(request):
     
     posts = posts.order_by('-published_date')
 
-    return render(request, 'app_blog/post_list.html', {'posts': posts, 'query': query, 'categorias': categorias,})
+    return render(request, 'app_blog/post_list.html', {'posts': posts, 'query': query, 'categorias': categorias,'tags': tags})
 
 
 def post_new(request):
@@ -72,6 +75,20 @@ def post_detail(request, pk):
     post.save(update_fields=['visualizacoes'])
 
     return render(request, 'app_blog/post_detail.html', {'post': post })
+
+
+def lista_tags(request):
+    tags = Tag.objects.all()
+    return render(request, 'app_blog/lista_tags.html', {'tags': tags})
+
+
+def posts_por_tag(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    posts = Post.objects.filter(tags__in=[tag], aprovado=True)
+    return render(request, 'app_blog/posts_por_tag.html', {'tag': tag, 'posts': posts})
+
+
+
 
 
 
