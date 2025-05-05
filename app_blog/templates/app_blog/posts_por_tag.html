@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Posts com a tag "{{ tag.name }}"{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Posts com a tag: "{{ tag.name }}"</h2>
+    
+    {% if posts %}
+        <ul class="list-group mt-3">
+            {% for post in posts %}
+                <li class="list-group-item">
+                    <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                    <br>
+                    <small>Publicado em {{ post.published_date|date:"d/m/Y H:i" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum post encontrado com esta tag.</p>
+    {% endif %}
+</div>
+{% endblock %}
